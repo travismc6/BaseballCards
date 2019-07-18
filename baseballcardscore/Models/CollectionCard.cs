@@ -1,0 +1,19 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace BaseballCardsCore.Models
+{
+    public class CollectionCard
+    {
+        public int Id { get; set; }
+        public int CardId { get; set; }
+        public int Condition { get; set; }
+        public string Notes { get; set; }
+
+        public ICollection<Photo> Photos { get; set; }
+
+        public Card Card { get; set; }
+    }
+}
