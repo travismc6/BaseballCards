@@ -12,5 +12,9 @@ namespace BaseballCardsCore.Models
         public string Name { get; set; }
         public string Notes { get; set; }
         public Photo StockPhoto { get; set; }
+
+        public int CardSetId { get; set; }
+
+        public CardSet CardSet { get; set; }
     }
 }

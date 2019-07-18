@@ -13,6 +13,15 @@ namespace BaseballCardsCore.Data
         {
         }
 
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+
+            builder.Entity<CardSet>().HasData(
+
+            );
+        }
+
         public DbSet<Card> Cards { get; set; }
         public DbSet<CardSet> CardSets { get; set; }
         public DbSet<Collection> Collections { get; set; }
