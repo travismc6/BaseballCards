@@ -50,5 +50,27 @@ namespace BaseballCardsCore.Data
                 .ThenBy(x => x.CardSet.Brand)
                 .ThenBy(x => x.Number).ToListAsync();
         }
+
+        public async Task<ICollection<CollectionCard>> GetCollectionCards(int collectionId, CardParams userParams)
+        {         
+            var collectionCards = _context.CollectionCards.Where(r => r.Id == collectionId).Include(r=> r.Card).Include(r=> r.Card.CardSet).AsQueryable();
+
+            if (userParams.Year != null)
+            {
+                collectionCards = collectionCards.Where(x => x.Card.CardSet.Year == userParams.Year);
+            }
+
+            if (!String.IsNullOrEmpty(userParams.Brand))
+            {
+                collectionCards = collectionCards.Where(x => x.Card.CardSet.Brand.ToLower() == userParams.Brand.ToLower());
+            }
+
+            if (!String.IsNullOrEmpty(userParams.Name))
+            {
+                collectionCards = collectionCards.Where(x => x.Card.CardSet.Name.ToLower() == userParams.Name.ToLower());
+            }
+
+            return await collectionCards.ToListAsync();
+        }
     }
 }

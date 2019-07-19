@@ -14,5 +14,7 @@ namespace BaseballCardsCore.Data
 
         Task<ICollection<Card>> GetCards(CardParams userParams);
 
+        Task<ICollection<CollectionCard>> GetCollectionCards(int collectionId, CardParams userParams);
+
     }
 }
