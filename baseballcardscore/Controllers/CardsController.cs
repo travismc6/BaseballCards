@@ -34,9 +34,15 @@ namespace BaseballCardsCore.Controllers
         }
 
         [HttpGet("setchecklists")]
-        public async Task<IActionResult> GetSetChecklists(int collectionId, [FromQuery]CardParams cardParams)
+        public async Task<IActionResult> GetSetChecklists(int? collectionId, [FromQuery]CardParams cardParams)
         {
-            CardsForChecklistDto dto = new CardsForChecklistDto {CollectionId = collectionId };
+            // DEBUG ONLY!
+            if (collectionId == null)
+            {
+                collectionId = 1;
+            }
+
+            CardsForChecklistDto dto = new CardsForChecklistDto {CollectionId = collectionId.Value };
 
             var cards = await _repo.GetCards(cardParams);
 
@@ -53,7 +59,7 @@ namespace BaseballCardsCore.Controllers
                     Cards = new List<CardForChecklistDto>()
                 };
 
-                var mycards = await _repo.GetCollectionCards(collectionId, cardParams);
+                var mycards = await _repo.GetCollectionCards(collectionId.Value, cardParams);
 
                 foreach(var c in s)
                 {
@@ -78,9 +84,6 @@ namespace BaseballCardsCore.Controllers
             return Ok(dto);
         }
 
-
-
-
         [HttpGet("cardsforcollection")]
         public async Task<IActionResult> GetCardsForCollection([FromQuery]CardParams cardParams)
         {
@@ -89,6 +92,12 @@ namespace BaseballCardsCore.Controllers
             var cardToReturn = _mapper.Map<ICollection<CardsForListDto>>(cards);
 
             return Ok(cardToReturn);
+        }
+
+
+        public async Task<IActionResult> AddCollectionCard()
+        {
+            return Ok();
         }
     }
 }
