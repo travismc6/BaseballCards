@@ -26,7 +26,13 @@ namespace BaseballCardsCore.Dtos
 
     public class CardForChecklistDto
     {
-        public CardsForListDto CardsForList { get; set; }
+        public int Id { get; set; }
+        public string Number { get; set; }
+        public string PlayerName { get; set; }
+        public string Notes { get; set; }
+        public string SetName { get; set; }
+        public string Brand { get; set; }
+        public int Year { get; set; }
         public bool HasCard { get; set; }
     }
 }

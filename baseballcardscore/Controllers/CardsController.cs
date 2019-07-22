@@ -34,9 +34,9 @@ namespace BaseballCardsCore.Controllers
         }
 
         [HttpGet("setchecklists")]
-        public async Task<IActionResult> GetSetChecklists([FromQuery]CardParams cardParams)
+        public async Task<IActionResult> GetSetChecklists(int collectionId, [FromQuery]CardParams cardParams)
         {
-            CardsForChecklistDto dto = new CardsForChecklistDto();
+            CardsForChecklistDto dto = new CardsForChecklistDto {CollectionId = collectionId };
 
             var cards = await _repo.GetCards(cardParams);
 
@@ -53,14 +53,23 @@ namespace BaseballCardsCore.Controllers
                     Cards = new List<CardForChecklistDto>()
                 };
 
+                var mycards = await _repo.GetCollectionCards(collectionId, cardParams);
+
                 foreach(var c in s)
                 {
-                    var card = new CardForChecklistDto();
-
-                    //card.HasCard = 
-
-
-                    //setDto.Cards.Add(card);
+                    CardForChecklistDto cardDto = new CardForChecklistDto()
+                    {
+                        Brand = c.CardSet.Brand,
+                        PlayerName = c.Name,
+                        Id = c.Id,
+                        Notes = c.Notes,
+                        Year = c.CardSet.Year,
+                        SetName = c.CardSet.Name,
+                        Number = c.Number,
+                        HasCard = mycards.Any(x => x.CardId == c.Id)
+                    };
+                  
+                    setDto.Cards.Add(cardDto);
                 }
 
                 dto.Sets.Add(setDto);

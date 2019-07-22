@@ -1,56 +1,43 @@
 ﻿
 import React, { Component } from 'react';
+import { Card } from './Card';
 
-export class FetchData extends Component {
-    static displayName = FetchData.name;
+export class CardList extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { forecasts: [], loading: true };
+        this.state = { sets: [], loading: true };    }
 
-        fetch('api/SampleData/WeatherForecasts')
+    componentDidMount() {
+
+        fetch('api/cards/setchecklists?collectionid=1&year=1951')
             .then(response => response.json())
             .then(data => {
-                this.setState({ forecasts: data, loading: false });
+                this.setState({ sets: data.sets, loading: false });
             });
     }
 
-    static renderForecastsTable(forecasts) {
-        return (
-            <table className='table table-striped'>
-                <thead>
-                    <tr>
-                        <th>Date</th>
-                        <th>Temp. (C)</th>
-                        <th>Temp. (F)</th>
-                        <th>Summary</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {forecasts.map(forecast =>
-                        <tr key={forecast.dateFormatted}>
-                            <td>{forecast.dateFormatted}</td>
-                            <td>{forecast.temperatureC}</td>
-                            <td>{forecast.temperatureF}</td>
-                            <td>{forecast.summary}</td>
-                        </tr>
-                    )}
-                </tbody>
-            </table>
-        );
-    }
-
     render() {
-        let contents = this.state.loading
-            ? <p><em>Loading...</em></p>
-            : FetchData.renderForecastsTable(this.state.forecasts);
-
         return (
             <div>
-                <h1>Card List</h1>
-                <p>List of all cards.</p>
-                {contents}
-            </div>
-        );
+                <ul>
+                    {this.state.sets.map(set => (
+                        <div>
+                            <div>
+                                Year:
+                                <select></select>
+
+                                Brand:
+                                <select></select>
+                            </div>
+
+                            <h1>{set.year} {set.brand}</h1>
+                            {set.cards.map(card => (
+                                <Card key={card.id} card={card} />                          
+                            ))}
+                        </div>
+                    ))}
+                </ul>
+            </div>)
     }
 }

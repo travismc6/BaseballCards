@@ -13,7 +13,7 @@ namespace BaseballCardsCore.Dtos
         public string Notes { get; set; }
         public string SetName { get; set; }
         public string Brand { get; set; }
-        public string Year { get; set; }
+        public int Year { get; set; }
 
     }
 }
