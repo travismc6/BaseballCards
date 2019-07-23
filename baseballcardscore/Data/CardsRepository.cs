@@ -27,6 +27,11 @@ namespace BaseballCardsCore.Data
             _context.Remove(entity);
         }
 
+        public async Task<Card> GetCardById(int id)
+        {
+            return await _context.Cards.FirstOrDefaultAsync(r => r.Id == id);
+        }
+
         public async Task<ICollection<Card>> GetCards(CardParams userParams)
         {
             var cards =  _context.Cards.Include(x=> x.CardSet).AsQueryable();
@@ -51,9 +56,14 @@ namespace BaseballCardsCore.Data
                 .ThenBy(x => x.Number).ToListAsync();
         }
 
+        public async Task<Collection> GetCollection(int collectionId)
+        {
+            return await _context.Collections.Include(r=> r.CollectionCards).FirstOrDefaultAsync(r => r.Id == collectionId);
+        }
+
         public async Task<ICollection<CollectionCard>> GetCollectionCards(int collectionId, CardParams userParams)
         {         
-            var collectionCards = _context.CollectionCards.Where(r => r.Id == collectionId).Include(r=> r.Card).Include(r=> r.Card.CardSet).AsQueryable();
+            var collectionCards = _context.CollectionCards.Where(r => r.CollectionId == collectionId).Include(r=> r.Card).Include(r=> r.Card.CardSet).AsQueryable();
 
             if (userParams.Year != null)
             {
@@ -71,6 +81,13 @@ namespace BaseballCardsCore.Data
             }
 
             return await collectionCards.ToListAsync();
+        }
+
+        public async Task<bool> SaveAll()
+        {
+            var result = await _context.SaveChangesAsync() > 0;
+
+            return result;
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -6,6 +7,7 @@ using AutoMapper;
 using BaseballCardsCore.Data;
 using BaseballCardsCore.Dtos;
 using BaseballCardsCore.Helpers;
+using BaseballCardsCore.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
@@ -61,7 +63,7 @@ namespace BaseballCardsCore.Controllers
 
                 var mycards = await _repo.GetCollectionCards(collectionId.Value, cardParams);
 
-                foreach(var c in s)
+                foreach(var c in s.OrderBy(r=> r.Number, new NumberComparer()))
                 {
                     CardForChecklistDto cardDto = new CardForChecklistDto()
                     {
@@ -94,9 +96,39 @@ namespace BaseballCardsCore.Controllers
             return Ok(cardToReturn);
         }
 
-
-        public async Task<IActionResult> AddCollectionCard()
+        [HttpPut("{cardId}/collection/{collectionId}")]
+        public async Task<IActionResult> AddOrRemoveCollectionCard(int collectionId, int cardId)
         {
+            var collection = await _repo.GetCollection(collectionId);
+
+            if (collection == null)
+                return NotFound();
+
+            var collectionCards = collection.CollectionCards.Where(r => r.CollectionId == collectionId &&  r.CardId == cardId);
+
+            if(collectionCards.Any())
+            {
+                foreach(var c in collectionCards.ToList())
+                {
+                    collection.CollectionCards.Remove(c);
+                }
+            }
+
+            else
+            {
+                var cmodel = await _repo.GetCardById(cardId);
+
+                var model = new CollectionCard
+                {
+                    CardId = cmodel.Id,
+                    CollectionId = collectionId
+                };
+                
+                _repo.Add(model);
+            }
+
+            await _repo.SaveAll();
+
             return Ok();
         }
     }

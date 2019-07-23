@@ -10,9 +10,10 @@ export class Card extends Component {
 
     render() {
         return (
-            <div>
-                <input
+            <div style={{ backgroundColor: this.props.isBusy ? "gray" : "white" }} >
+                <input disabled={this.props.isBusy}
                     type="checkbox"
+                    onClick={this.props.onCheckboxChange}
                     checked={this.props.card.hasCard} />
                 {this.props.card.number}
                 {this.props.card.playerName}
