@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 
 export class NameFilter extends Component {
 
-    constructor({ props }) {
+    constructor( props ) {
         super(props);
         this.state = {  };
     }

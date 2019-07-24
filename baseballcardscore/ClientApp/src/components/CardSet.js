@@ -14,14 +14,12 @@ export class CardSet extends Component {
     onCheckboxChange = id => {
         const list = this.state.cards.slice();
 
-        list.forEach((card) => {
-            if (card.id === id) {
-                card.hasCard = !card.hasCard;
-                card.isBusy = true;
-                this.updateCardState(card);
-                this.updateCardStatus(card);
-            }
-        });
+        let card = list.find(cd => { return cd.id === id });
+        card.hasCard = !card.hasCard;
+        card.isBusy = true;
+
+        this.updateCardState(card);
+        this.updateCardStatus(card);
     };
 
     updateCardStatus = (card) => {
@@ -41,11 +39,8 @@ export class CardSet extends Component {
     updateCardState = (c) => {
         const list = this.state.cards.slice();
 
-        this.state.cards.forEach((card) => {
-            if (card.id === c.id) {
-                card = c;
-            }
-        });
+        let stateCard = list.find(cd => {return cd.id === c.id });
+        stateCard = c;
 
         this.setState({ cards: list });
     }
@@ -58,7 +53,6 @@ export class CardSet extends Component {
                     {this.props.set.description}
                 </div>
                 {this.state.cards.map((card) => (
-
                     <ChecklistCard key={card.id} card={card} onCheckboxChange={() => this.onCheckboxChange(card.id)} isBusy={card.isBusy} />
                 ))}
             </div>

@@ -1,6 +1,6 @@
 ﻿
 import React, { Component } from 'react';
-import { CollectionCard } from './CollectionCard';
+import  CollectionCard  from './CollectionCard';
 import { YearFilter } from './YearFilter';
 import { BrandFilter } from './BrandFilter';
 import { SortByFilter } from './SortByFilter';
