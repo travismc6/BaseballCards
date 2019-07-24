@@ -15,7 +15,7 @@ export default class App extends Component {
             <Route path='/mycollection' component={MyCollection} />
             <Route path='/cardlist' component={CardList} />
             <Route path='/addcard' component={AddCard} />
-            <Route exact path='/' component={CardList} />
+            <Route exact path='/' component={MyCollection} />
             <Route path='/fetch-data' component={FetchData} />
 
       </Layout>

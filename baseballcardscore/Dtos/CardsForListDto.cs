@@ -11,6 +11,8 @@ namespace BaseballCardsCore.Dtos
         public string Number { get; set; }
         public string PlayerName { get; set; }
         public string Notes { get; set; }
+        public int Condition { get; set; }
+        public string Image { get; set; }
         public string SetName { get; set; }
         public string Brand { get; set; }
         public int Year { get; set; }

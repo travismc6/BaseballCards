@@ -1,6 +1,6 @@
 ﻿
 import React, { Component } from 'react';
-import { Card } from './Card';
+import { ChecklistCard } from './ChecklistCard';
 
 export class CardSet extends Component {
     state = {
@@ -59,7 +59,7 @@ export class CardSet extends Component {
                 </div>
                 {this.state.cards.map((card) => (
 
-                    <Card key={card.id} card={card} onCheckboxChange={() => this.onCheckboxChange(card.id)} isBusy={card.isBusy} />
+                    <ChecklistCard key={card.id} card={card} onCheckboxChange={() => this.onCheckboxChange(card.id)} isBusy={card.isBusy} />
                 ))}
             </div>
         )

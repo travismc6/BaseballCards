@@ -1,7 +1,7 @@
 ﻿
 import React, { Component } from 'react';
 
-export class Card extends Component {
+export class ChecklistCard extends Component {
 
     constructor({ props }) {
         super(props);

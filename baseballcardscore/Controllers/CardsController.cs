@@ -86,14 +86,14 @@ namespace BaseballCardsCore.Controllers
             return Ok(dto);
         }
 
-        [HttpGet("cardsforcollection")]
-        public async Task<IActionResult> GetCardsForCollection([FromQuery]CardParams cardParams)
+        [HttpGet("/collection/{collectionId}/cardsforcollection")]
+        public async Task<IActionResult> GetCardsForCollection(int collectionId, [FromQuery]CardParams cardParams)
         {
-            var cards = await _repo.GetCards(cardParams);
+            var cards = await _repo.GetCollectionCards(collectionId, cardParams);
 
-            var cardToReturn = _mapper.Map<ICollection<CardsForListDto>>(cards);
+            var cardsToReturn = _mapper.Map<ICollection<CardsForListDto>>(cards);
 
-            return Ok(cardToReturn);
+            return Ok(cardsToReturn.OrderBy(r => r.Year).ThenBy(r => r.Brand).ThenBy(r=> r.SetName).ThenBy(r => r.Number));
         }
 
         [HttpPut("{cardId}/collection/{collectionId}")]
