@@ -5,7 +5,7 @@ import { YearFilter } from './YearFilter';
 import { BrandFilter } from './BrandFilter';
 import { SortByFilter } from './SortByFilter';
 
-export class CardList extends Component {
+export class CardChecklist extends Component {
     checklistApi = 'api/cards/setchecklists?collectionid=1';
 
     constructor(props) {
@@ -20,18 +20,18 @@ export class CardList extends Component {
             });
     }
 
-    yearChanged = (year) =>
+    yearChangedHandler = (year) =>
     {
         this.setState({ year: year });
         this.filter(year, this.state.brand, this.state.sortBy);
     }
 
-    brandChanged = (brand) => {
+    brandChangedHandler = (brand) => {
         this.setState({ brand: brand });
         this.filter(this.state.year, brand, this.state.sortBy);
     }
 
-    optionChanged = (sortBy) => {
+    optionChangedHandler = (sortBy) => {
         this.setState({ sortBy: sortBy });
         this.filter(this.state.year, this.state.brand, sortBy);
     }
@@ -79,9 +79,9 @@ export class CardList extends Component {
         return (
             <div>
                 <div>
-                    <YearFilter yearChanged={this.yearChanged}/>
-                    <BrandFilter brandChanged={this.brandChanged} />
-                    <SortByFilter optionChanged={this.optionChanged} />
+                    <YearFilter yearChanged={this.yearChangedHandler}/>
+                    <BrandFilter brandChanged={this.brandChangedHandler} />
+                    <SortByFilter optionChanged={this.optionChangedHandler} />
                 </div>
                 <ul>
                     {sets.map(set => (

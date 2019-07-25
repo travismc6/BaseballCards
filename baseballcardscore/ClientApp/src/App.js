@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Route } from 'react-router';
 import { Layout } from './components/Layout';
 import { FetchData } from './components/FetchData';
-import { CardList } from './components/CardList';
+import { CardChecklist } from './components/CardChecklist';
 import { AddCard } from './components/AddCard';
 import { MyCollection } from './components/MyCollection';
 
@@ -13,7 +13,7 @@ export default class App extends Component {
     return (
         <Layout>
             <Route path='/mycollection' component={MyCollection} />
-            <Route path='/cardlist' component={CardList} />
+            <Route path='/cardchecklist' component={CardChecklist} />
             <Route path='/addcard' component={AddCard} />
             <Route exact path='/' component={MyCollection} />
             <Route path='/fetch-data' component={FetchData} />

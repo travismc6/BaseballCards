@@ -1,22 +1,17 @@
 ﻿
 import React, { Component } from 'react';
 
-export class ChecklistCard extends Component {
-
-    constructor({ props }) {
-        super(props);
-        this.state = {  };
-    }
-
-    render() {
+const ChecklistCard = (props) => {
         return (
-            <div key={this.props.card.id} style={{ backgroundColor: this.props.isBusy ? "gray" : "white" }} >
-                <input disabled={this.props.isBusy}
+            <div key={props.card.id} style={{ backgroundColor: props.isBusy ? "gray" : "white" }} >
+                <input disabled={props.isBusy}
                     type="checkbox"
-                    onClick={this.props.onCheckboxChange}
-                    defaultChecked={this.props.card.hasCard} />
-                {this.props.card.number}
-                {this.props.card.playerName}
+                    onClick={props.onCheckboxChange}
+                    defaultChecked={props.card.hasCard} />
+                {props.card.number}
+                {props.card.playerName}
             </div>
-        )}
+        )
 }
+
+export default ChecklistCard;
