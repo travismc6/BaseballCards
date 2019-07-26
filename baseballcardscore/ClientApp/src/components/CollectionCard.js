@@ -1,5 +1,6 @@
 ﻿
 import React from 'react';
+import image from '../images/card.jpg';
 
 const CollectionCard = (props) => {
     const style = {
@@ -12,6 +13,10 @@ const CollectionCard = (props) => {
 
     return (
         <div style={style} key={props.card.id}  >
+
+            <image src={image}  />
+
+
             <div>
                 {props.card.number} {props.card.playerName}
             </div>
