@@ -16,6 +16,7 @@ namespace BaseballCardsCore.Dtos
         public string SetName { get; set; }
         public string Brand { get; set; }
         public int Year { get; set; }
+        public int SetId { get; set; }
 
     }
 }

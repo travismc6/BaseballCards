@@ -18,6 +18,7 @@ namespace BaseballCardsCore.Dtos
         public string Brand { get; set; }
         public string Description { get; set; }
         public string Name { get; set; }
+        public int Id { get; set; }
 
         // list of cards that are owned
         public ICollection<CardForChecklistDto> Cards { get; set; }

@@ -58,7 +58,8 @@ namespace BaseballCardsCore.Controllers
                     Description = s.Key.Description,
                     Year = s.Key.Year,
                     Name = s.Key.Name,
-                    Cards = new List<CardForChecklistDto>()
+                    Cards = new List<CardForChecklistDto>(),
+                    Id = s.Key.Id
                 };
 
                 var mycards = await _repo.GetCollectionCards(collectionId.Value, cardParams);

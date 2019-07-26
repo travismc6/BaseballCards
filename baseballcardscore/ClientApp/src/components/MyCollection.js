@@ -119,6 +119,10 @@ export class MyCollection extends Component {
                     <SortByFilter optionChanged={this.optionChangedHandler} />
                     <NameFilter nameChanged={this.nameChangedHandler} />
                 </div>
+                <div>
+                    <b>Cards: </b> {cards.length}
+                </div>
+
                 {cardList}
             </div>
         );

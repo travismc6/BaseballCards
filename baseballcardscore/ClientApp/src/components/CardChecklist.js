@@ -77,16 +77,16 @@ export class CardChecklist extends Component {
 
     renderSets(sets) {
         return (
-            <div>
+            <div >
                 <div>
                     <YearFilter yearChanged={this.yearChangedHandler}/>
                     <BrandFilter brandChanged={this.brandChangedHandler} />
                     <SortByFilter optionChanged={this.optionChangedHandler} />
                 </div>
                 <ul>
-                    {sets.map(set => (
+                    {sets.map( (set,i) => (
                         <div key={set.id} >
-                            <CardSet key={set.id} set={set}  />
+                            <CardSet  set={set}  />
                         </div>
                     ))}
                 </ul>
