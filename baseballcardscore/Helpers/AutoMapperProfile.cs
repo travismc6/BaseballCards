@@ -25,7 +25,7 @@ namespace BaseballCardsCore.Helpers
                 .ForMember(x => x.SetName, opt => { opt.MapFrom(src => src.Card.CardSet.Name); })
                 .ForMember(x => x.SetId, opt => { opt.MapFrom(src => src.Card.CardSet.Id); })
                 .ForMember(x => x.Condition, opt => { opt.MapFrom(src => src.Condition); })
-                .ForMember(x => x.Image, opt => { opt.MapFrom(src => src.Condition); })
+                .ForMember(x => x.Image, opt => { opt.MapFrom(src => src.Photos.Any() ? src.Photos.First().Url : "https://st4.depositphotos.com/1020091/20129/v/1600/depositphotos_201293330-stock-illustration-baseball-card-icon-flat-color.jpg");  })
                 .ForMember(x => x.Notes, opt => { opt.MapFrom(src => src.Notes); })
                 .ForMember(x => x.Number, opt => { opt.MapFrom(src => src.Card.Number); });
 

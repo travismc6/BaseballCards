@@ -2,30 +2,34 @@
 import React from 'react';
 import image from '../images/card.jpg';
 
+
+
 const CollectionCard = (props) => {
     const style = {
         display: 'inline-block',
-        padding: '16px',
+        padding: '5px',
         margin: '16px',
         border: '1px solid black',
-        textAlign: 'center'
+        textAlign: 'left'
     };
 
     return (
         <div style={style} key={props.card.id}  >
 
-            <image src={image}  />
+            <img  src={image} style={{ height: 100, display:'inline-block' }} />
 
-
-            <div>
-                {props.card.number} {props.card.playerName}
-            </div>
-            {props.card.year} {props.card.brand}
-            <div>
-            </div>
-            <div>
-            </div>
-        </div>
+            <div style={{ display: 'inline-block' }}>
+                <div>
+                    <strong>{props.card.number} {props.card.playerName}</strong>
+                </div>
+                <div>
+                    {props.card.year} {props.card.brand}
+                </div>
+                <div style={{ alignContent: 'bottom' }}>
+                    <a href="">details</a>
+                </div>
+                </div>
+           </div>
     )
 };
 
