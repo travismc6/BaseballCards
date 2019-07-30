@@ -13,6 +13,11 @@ const CollectionCard = (props) => {
         textAlign: 'left'
     };
 
+    handleEdit = (e) => {
+        e.preventDefault();
+        this.props.history.push('/editcard')
+    }
+
     return (
         <div style={style} key={props.card.id}  >
 
@@ -27,6 +32,7 @@ const CollectionCard = (props) => {
                 </div>
                 <div style={{ alignContent: 'bottom' }}>
                     <a href="">details</a>
+                    <a onClick={event => handleEdit} >edit</a>
                 </div>
                 </div>
            </div>
