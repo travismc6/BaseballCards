@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { Route } from 'react-router';
 import { Layout } from './components/Layout';
 import { FetchData } from './components/FetchData';
-import { CardChecklist } from './components/CardChecklist';
-import { AddCard } from './components/AddCard';
-import { MyCollection } from './components/MyCollection';
+import { CardChecklist } from './components/CardChecklist/CardChecklist';
+import { AddCard } from './components/AddCard/AddCard';
+import { MyCollection } from './components/CardCollection/MyCollection';
 
 export default class App extends Component {
   static displayName = App.name;

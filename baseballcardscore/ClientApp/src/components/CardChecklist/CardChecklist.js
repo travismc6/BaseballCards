@@ -1,9 +1,9 @@
 ﻿
 import React, { Component } from 'react';
-import { CardSet } from './CardSet';
-import { YearFilter } from './YearFilter';
-import { BrandFilter } from './BrandFilter';
-import { SortByFilter } from './SortByFilter';
+import { CardSet } from '../CardSet/CardSet';
+import { YearFilter } from '../Filters/YearFilter';
+import { BrandFilter } from '../Filters/BrandFilter';
+import { SortByFilter } from '../Filters/SortByFilter';
 
 export class CardChecklist extends Component {
     checklistApi = 'api/cards/setchecklists?collectionid=1';

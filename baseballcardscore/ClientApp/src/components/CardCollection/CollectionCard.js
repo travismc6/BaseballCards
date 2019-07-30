@@ -1,6 +1,6 @@
 ﻿
 import React from 'react';
-import image from '../images/card.jpg';
+import image from '../../assets/card.jpg';
 
 
 
@@ -16,7 +16,7 @@ const CollectionCard = (props) => {
     return (
         <div style={style} key={props.card.id}  >
 
-            <img  src={image} style={{ height: 100, display:'inline-block' }} />
+            <img  src={props.card.image} style={{ height: 100, display:'inline-block' }} />
 
             <div style={{ display: 'inline-block' }}>
                 <div>
