@@ -12,7 +12,7 @@ export class SortByFilter extends Component {
         return (
             <div>
                 Sort By:
-                <select onChange={(e) => this.props.optionChanged(e.target.value)}>
+                <select onChange={(e) => this.props.optionChanged("sort", e.target.value)}>
                     {this.state.options.map((b,i) => (<option value={i}>{b}</option>)) }
                 </select>
             </div>

@@ -63,7 +63,7 @@ namespace BaseballCardsCore.Data
 
         public async Task<ICollection<CollectionCard>> GetCollectionCards(int collectionId, CardParams userParams)
         {         
-            var collectionCards = _context.CollectionCards.Where(r => r.CollectionId == collectionId).Include(r=> r.Card).Include(r=> r.Card.CardSet).AsQueryable();
+            var collectionCards = _context.CollectionCards.Where(r => r.CollectionId == collectionId).Include(r=> r.Card).Include(r=> r.Photos).Include(r=> r.Card.CardSet).AsQueryable();
 
             if (userParams.Year != null)
             {

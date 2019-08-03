@@ -1,7 +1,9 @@
 ﻿
 import React from 'react';
-import image from '../images/card.jpg';
+import image from '../../assets/card.jpg';
+import { Collapse, Container, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
 
+import { Link } from 'react-router-dom';
 
 
 const CollectionCard = (props) => {
@@ -13,10 +15,16 @@ const CollectionCard = (props) => {
         textAlign: 'left'
     };
 
+    const handleEdit = (e) => {
+        e.preventDefault();
+
+        this.props.history.push('/editcard')
+    }
+
     return (
         <div style={style} key={props.card.id}  >
 
-            <img  src={image} style={{ height: 100, display:'inline-block' }} />
+            <img  src={props.card.image} style={{ height: 100, display:'inline-block' }} />
 
             <div style={{ display: 'inline-block' }}>
                 <div>
@@ -26,12 +34,18 @@ const CollectionCard = (props) => {
                     {props.card.year} {props.card.brand}
                 </div>
                 <div style={{ alignContent: 'bottom' }}>
-                    <a href="">details</a>
+                    <div><a href="">details</a></div>
+                    <Route path='/fetch-data' component={FetchData} />
+
+                    <NavItem>
+                        <NavLink tag={Link} to="/editcard/">My Collection</NavLink>
+                    </NavItem>
+
                 </div>
                 </div>
            </div>
     )
 };
 
-export default CollectionCard;
+export default (CollectionCard)
 

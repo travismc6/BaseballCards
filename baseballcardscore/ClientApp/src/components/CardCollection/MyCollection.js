@@ -1,10 +1,10 @@
 ﻿
 import React, { Component } from 'react';
-import  CollectionCard  from './CollectionCard';
-import { YearFilter } from './YearFilter';
-import { BrandFilter } from './BrandFilter';
-import { SortByFilter } from './SortByFilter';
-import { NameFilter } from './NameFilter';
+import  CollectionCard  from '../CardCollection/CollectionCard';
+import { YearFilter } from '../Filters/YearFilter';
+import { BrandFilter } from '../Filters/BrandFilter';
+import { SortByFilter } from '../Filters/SortByFilter';
+import { NameFilter } from '../Filters/NameFilter';
 
 export class MyCollection extends Component {
     listApi = 'collection/1/cardsforcollection';

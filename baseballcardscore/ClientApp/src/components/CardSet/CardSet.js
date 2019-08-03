@@ -1,6 +1,6 @@
 ﻿
 import React, { Component } from 'react';
-import ChecklistCard  from './ChecklistCard';
+import ChecklistCard  from '../CardChecklist/ChecklistCard';
 
 export class CardSet extends Component {
     state = {
