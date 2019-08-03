@@ -10,7 +10,13 @@ export class CardChecklist extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { allSets: [], sets: [], loading: true, year:0, brand:"", sortBy:0 };    }
+        this.state = {
+            allSets: [], sets: [], loading: true,
+            filters: {
+                year: 0, brand: "", sortBy: 0, name: ""
+            }
+        };
+    }
 
     componentDidMount() {
         fetch(this.checklistApi)
@@ -20,51 +26,56 @@ export class CardChecklist extends Component {
             });
     }
 
-    yearChangedHandler = (year) =>
-    {
-        this.setState({ year: year });
-        this.filter(year, this.state.brand, this.state.sortBy);
+    filterChanged = (filter, value) => {
+        const filters = this.state.filters;
+
+        if (filter.toLowerCase() == "year") {
+            filters.year = value;
+        }
+        else if (filter.toLowerCase() == "brand") {
+            filters.brand = value;
+        }
+        else if (filter.toLowerCase() == "name") {
+            filters.name = value;
+        }
+        else if (filter.toLowerCase() == "sort") {
+            filters.sortBy = value;
+        }
+
+        this.setState({ filters: filters });
+        this.filter();
     }
 
-    brandChangedHandler = (brand) => {
-        this.setState({ brand: brand });
-        this.filter(this.state.year, brand, this.state.sortBy);
-    }
 
-    optionChangedHandler = (sortBy) => {
-        this.setState({ sortBy: sortBy });
-        this.filter(this.state.year, this.state.brand, sortBy);
-    }
-
-    filter = (year, brand, sortBy) => {
+    filter = () => {
         let list = this.state.allSets.slice();
 
-        if (year > 0) {
-            list = list.filter(set =>  set.year == year );
+        if (this.state.filters.year > 0) {
+            list = list.filter(set => set.year == this.state.filters.year );
         }
 
-        if (brand != "") {
-            list = list.filter(set =>  set.brand == brand );
+        if (this.state.filters.brand != "") {
+            list = list.filter(set => set.brand == this.state.filters.brand );
         }
 
-        if (sortBy == 0) {
+        if (this.state.filters.sortBy == 0) {
             list.sort((a, b) => {
                 return a.year - b.year;
             });
         }
-        else if (sortBy == 1) {
+        else if (this.state.filters.sortBy == 1) {
             list.sort((a, b) => {
                 return b.year - a.year;
             });
         }
-        else if (sortBy == 2) {
+        else if (this.state.filters.sortBy == 2) {
             list.sort((a, b) => {
                 if (a.brand < b.brand) { return -1; }
                 if (a.brand > b.brand) { return 1; }
                 return 0;
             });
         }
-        else if (sortBy == 3) {
+        else if (this.state.filters.sortBy == 3) {
             list.sort((a, b) => {
                 if (a.brand > b.brand) { return -1; }
                 if (a.brand < b.brand) { return 1; }
@@ -79,9 +90,9 @@ export class CardChecklist extends Component {
         return (
             <div >
                 <div>
-                    <YearFilter yearChanged={this.yearChangedHandler}/>
-                    <BrandFilter brandChanged={this.brandChangedHandler} />
-                    <SortByFilter optionChanged={this.optionChangedHandler} />
+                    <YearFilter yearChanged={this.filterChanged}/>
+                    <BrandFilter brandChanged={this.filterChanged} />
+                    <SortByFilter optionChanged={this.filterChanged} />
                 </div>
                 <ul>
                     {sets.map( (set,i) => (

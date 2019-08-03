@@ -12,7 +12,7 @@ export class BrandFilter extends Component {
         return (
             <div>
                 Brand:
-                <select onChange={(e) => this.props.brandChanged(e.target.value)}>
+                <select onChange={(e) => this.props.brandChanged("brand", e.target.value)}>
                     <option value={""}>All</option>
                     {this.state.brands.map(b => (<option value={b}>{b}</option>)) }
                 </select>

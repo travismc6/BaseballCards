@@ -12,7 +12,7 @@ export class YearFilter extends Component {
         return (
             <div>
                 Year:
-                <select onChange={(e) => this.props.yearChanged(e.target.value)}>
+                <select onChange={(e) => this.props.yearChanged("year", e.target.value)}>
                     <option value={0}>All</option>
                     {this.state.years.map(y => (<option value={y}>{y}</option>))}
                 </select>

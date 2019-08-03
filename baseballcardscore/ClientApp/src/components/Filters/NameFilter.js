@@ -12,7 +12,7 @@ export class NameFilter extends Component {
         return (
             <div>
                 Name:
-                <input  onChange={this.props.nameChanged} />
+                <input  onChange={"name", this.props.nameChanged} />
             </div>
         )}
 }
