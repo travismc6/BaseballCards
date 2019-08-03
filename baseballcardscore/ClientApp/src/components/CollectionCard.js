@@ -7,7 +7,7 @@ import image from '../images/card.jpg';
 const CollectionCard = (props) => {
     const style = {
         display: 'inline-block',
-        padding: '5px',
+        padding: '8px',
         margin: '16px',
         border: '1px solid black',
         textAlign: 'left'
