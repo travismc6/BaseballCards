@@ -35,7 +35,7 @@ namespace BaseballCardsCore.Controllers
             return Ok(cardToReturn);
         }
 
-        [HttpGet("setchecklists")]
+        [HttpGet("setchecklists/{collectionId}")]
         public async Task<IActionResult> GetSetChecklists(int? collectionId, [FromQuery]CardParams cardParams)
         {
             // DEBUG ONLY!
@@ -131,6 +131,35 @@ namespace BaseballCardsCore.Controllers
             await _repo.SaveAll();
 
             return Ok();
+        }
+
+        [HttpGet("collection/{collectionId}/card/{id}")]
+        public async Task<IActionResult> GetCollectionCard(int collectionId, int id)
+        {
+            var card = await _repo.GetCollectionCardById(collectionId, id);
+
+            if (card == null)
+                return NotFound();
+            else
+            {
+                var cardToReturn = _mapper.Map<CardsForListDto>(card);
+
+                return Ok(cardToReturn);
+            }
+        }
+
+        [HttpPost("collection/{collectionId}/card/{id}")]
+        public async Task<IActionResult> UpdateCollectionCard(int collectionId, int id, CardsForListDto userForUpdateDto)
+        {
+            var userFromRepo = await _repo.GetCollectionCardById(collectionId, id);
+
+            _mapper.Map(userForUpdateDto, userFromRepo);
+
+            if (await _repo.SaveAll())
+                return NoContent();
+
+            throw new Exception($"Updating user {id} failed on save");
+
         }
     }
 }

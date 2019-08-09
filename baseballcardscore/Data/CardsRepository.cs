@@ -61,6 +61,11 @@ namespace BaseballCardsCore.Data
             return await _context.Collections.Include(r=> r.CollectionCards).FirstOrDefaultAsync(r => r.Id == collectionId);
         }
 
+        public async Task<CollectionCard> GetCollectionCardById(int collectionId, int id)
+        {
+            return await _context.CollectionCards.Include(r=> r.Card).Include(r=> r.Card.CardSet).Include(r=> r.Photos).FirstOrDefaultAsync(r => r.CollectionId == collectionId && r.Id == id);
+        }
+
         public async Task<ICollection<CollectionCard>> GetCollectionCards(int collectionId, CardParams userParams)
         {         
             var collectionCards = _context.CollectionCards.Where(r => r.CollectionId == collectionId).Include(r=> r.Card).Include(r=> r.Photos).Include(r=> r.Card.CardSet).AsQueryable();

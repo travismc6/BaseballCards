@@ -7,7 +7,10 @@ import { SortByFilter } from '../Filters/SortByFilter';
 import { NameFilter } from '../Filters/NameFilter';
 
 export class MyCollection extends Component {
-    listApi = 'collection/1/cardsforcollection';
+
+    collectionId = 1;
+
+    
 
     constructor( props ) {
         super(props);
@@ -15,10 +18,12 @@ export class MyCollection extends Component {
     }
 
     componentDidMount() {
-        fetch(this.listApi)
+        const listApi = "collection/" + this.collectionId + "/cardsforcollection";
+
+        fetch(listApi)
             .then(response => response.json())
             .then(data => {
-                this.setState({ cards: data, allCards:data, loading: false, year: 0, brand: "", sortBy: 0 });
+                this.setState({ cards: data, allCards: data, isLoading: false, year: 0, brand: "", sortBy: 0 });
             });
     }
 
@@ -108,7 +113,7 @@ export class MyCollection extends Component {
 
     renderCards(cards) {
         const cardList = cards.map((card) => {
-            return <CollectionCard card={card} id={card.id} />
+            return <CollectionCard card={card} id={card.id} collectionId={this.collectionId} />
         });
 
         return (
@@ -129,7 +134,7 @@ export class MyCollection extends Component {
     }
 
     render() {
-        let contents = this.state.loading
+        let contents = this.state.isLoading
             ? <p><em>Loading...</em></p>
             : this.renderCards(this.state.cards);
 

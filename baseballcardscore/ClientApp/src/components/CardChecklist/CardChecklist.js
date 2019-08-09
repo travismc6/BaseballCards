@@ -6,7 +6,7 @@ import { BrandFilter } from '../Filters/BrandFilter';
 import { SortByFilter } from '../Filters/SortByFilter';
 
 export class CardChecklist extends Component {
-    checklistApi = 'api/cards/setchecklists?collectionid=1';
+    checklistApi = 'api/cards/setchecklists/1';
 
     constructor(props) {
         super(props);

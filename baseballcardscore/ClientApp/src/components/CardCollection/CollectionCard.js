@@ -1,8 +1,5 @@
 ﻿
 import React from 'react';
-import image from '../../assets/card.jpg';
-import { Collapse, Container, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
-
 import { Link } from 'react-router-dom';
 
 
@@ -35,11 +32,8 @@ const CollectionCard = (props) => {
                 </div>
                 <div style={{ alignContent: 'bottom' }}>
                     <div><a href="">details</a></div>
-                    <Route path='/fetch-data' component={FetchData} />
 
-                    <NavItem>
-                        <NavLink tag={Link} to="/editcard/">My Collection</NavLink>
-                    </NavItem>
+                    <Link to={"/editCard/" + props.collectionId + "/" + props.card.id }>edit</Link>
 
                 </div>
                 </div>

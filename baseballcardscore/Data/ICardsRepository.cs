@@ -20,6 +20,8 @@ namespace BaseballCardsCore.Data
 
         Task<Collection> GetCollection(int collectionId);
 
+        Task<CollectionCard> GetCollectionCardById(int collectionId, int id);
+
         Task<bool> SaveAll();
 
 
