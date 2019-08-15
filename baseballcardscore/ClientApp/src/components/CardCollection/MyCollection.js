@@ -10,11 +10,14 @@ export class MyCollection extends Component {
 
     collectionId = 1;
 
-    
-
     constructor( props ) {
         super(props);
-        this.state = { cards: [], allCards: [], isLoading: true, year: 0, brand: "", sortBy: 0 , name:"" };
+        this.state = {
+            cards: [], allCards: [], isLoading: true,
+            filters: {
+                year: 0, brand: "", sortBy: 0, name: ""
+            }
+        };
     }
 
     componentDidMount() {
@@ -27,84 +30,77 @@ export class MyCollection extends Component {
             });
     }
 
-    yearChangedHandler = (year) => {
-        this.setState({ year: year });
-        this.filter(year, this.state.brand, this.state.sortBy);
+    filterChanged = (filter, value) => {
+        const filters = this.state.filters;
+
+        if (filter.toLowerCase() === "year") {
+            filters.year = value;
+        }
+        else if (filter.toLowerCase() === "brand") {
+            filters.brand = value;
+        }
+        else if (filter.toLowerCase() === "name") {
+            filters.name = value;
+        }
+        else if (filter.toLowerCase() === "sort") {
+            filters.sortBy = value;
+        }
+        else if (filter.toLowerCase() === "name") {
+            filters.name = value;
+        }
+
+        this.setState({ filters: filters });
+        this.filter();
     }
 
-    brandChangedHandler = (brand) => {
-        this.setState({ brand: brand });
-        this.filter(this.state.year, brand, this.state.sortBy);
-    }
-
-    optionChangedHandler = (sortBy) => {
-        this.setState({ sortBy: sortBy });
-        this.filter(this.state.year, this.state.brand, sortBy);
-    }
-
-    nameChangedHandler = (event) => {
-
-        const name = event.target.value;
-
-        this.setState({ name: name });
-        this.filter(this.state.year, this.state.brand, this.state.sortBy, name);
-    }
-
-    filter = (year, brand, sortBy, name) => {
+    filter = () => {
         let list = this.state.allCards.slice();
 
-        if (year > 0) {
-            list = list.filter(card => card.year == year);
+        if (this.state.filters.year > 0) {
+            list = list.filter(card => card.year == this.state.filters.year);
         }
 
-        if (brand != "") {
-            list = list.filter(card => card.brand == brand);
+        if (this.state.filters.brand !== "") {
+            list = list.filter(card => card.brand == this.state.filters.brand);
         }
 
-        if (name && name.trim().length > 0) {
-            list = list.filter(card => 
-            {
-                const names = card.playerName.toLowerCase().split(' ');
-                let match = false;
-
-                names.forEach(n => {
-                    if (n.startsWith(name.toLowerCase())) {
-                        match= true;
-                    }
-                });
-
-                return match;
-
-
-
-                //return card.playerName.toLowerCase().startsWith(name.toLowerCase())
-            });
-        }
-
-
-
-        if (sortBy == 0) {
+        if (this.state.filters.sortBy == 0) {
             list.sort((a, b) => {
                 return a.year - b.year;
             });
         }
-        else if (sortBy == 1) {
+        else if (this.state.filters.sortBy == 1) {
             list.sort((a, b) => {
                 return b.year - a.year;
             });
         }
-        else if (sortBy == 2) {
+        else if (this.state.filters.sortBy == 2) {
             list.sort((a, b) => {
                 if (a.brand < b.brand) { return -1; }
                 if (a.brand > b.brand) { return 1; }
                 return 0;
             });
         }
-        else if (sortBy == 3) {
+        else if (this.state.filters.sortBy == 3) {
             list.sort((a, b) => {
                 if (a.brand > b.brand) { return -1; }
                 if (a.brand < b.brand) { return 1; }
                 return 0;
+            });
+        }
+
+        if (this.state.filters.name.trim().length > 0) {
+            list = list.filter(card => {
+                const names = card.playerName.toLowerCase().split(' ');
+                let match = false;
+
+                names.forEach(n => {
+                    if (n.startsWith(this.state.filters.toLowerCase())) {
+                        match = true;
+                    }
+                });
+
+                return match;
             });
         }
 
@@ -119,10 +115,10 @@ export class MyCollection extends Component {
         return (
             <div>
                 <div>
-                    <YearFilter yearChanged={this.yearChangedHandler} />
-                    <BrandFilter brandChanged={this.brandChangedHandler} />
-                    <SortByFilter optionChanged={this.optionChangedHandler} />
-                    <NameFilter nameChanged={this.nameChangedHandler} />
+                    <YearFilter yearChanged={this.filterChanged} />
+                    <BrandFilter brandChanged={this.filterChanged} />
+                    <SortByFilter optionChanged={this.filterChanged} />
+                    <NameFilter nameChanged={this.filterChanged} />
                 </div>
                 <div>
                     <b>Cards: </b> {cards.length}

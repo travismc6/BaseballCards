@@ -12,12 +12,6 @@ const CollectionCard = (props) => {
         textAlign: 'left'
     };
 
-    const handleEdit = (e) => {
-        e.preventDefault();
-
-        this.props.history.push('/editcard')
-    }
-
     return (
         <div style={style} key={props.card.id}  >
 

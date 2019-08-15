@@ -94,7 +94,9 @@ namespace BaseballCardsCore.Controllers
 
             var cardsToReturn = _mapper.Map<ICollection<CardsForListDto>>(cards);
 
-            return Ok(cardsToReturn.OrderBy(r => r.Year).ThenBy(r => r.Brand).ThenBy(r=> r.SetName).ThenBy(r => r.Number));
+            return Ok(cardsToReturn.OrderBy(r => r.Year).ThenBy(r => r.Brand).ThenBy(r=> r.SetName).ThenBy(r => r.Number, new NumberComparer()));
+
+            // OrderBy(r=> r.Number, new NumberComparer())
         }
 
         [HttpPut("{cardId}/collection/{collectionId}")]

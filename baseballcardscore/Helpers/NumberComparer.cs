@@ -30,12 +30,21 @@ namespace BaseballCardsCore.Helpers
 
             else
             {
-                //get number
-                //get suffix
+                var num1Arr = x.Split(" ");
+                var num2Arr = y.Split(" ");
 
-                //compare number first, then compare suffix
+                //get number
+                Int32.TryParse(num1Arr[0], out num1);
+                Int32.TryParse(num2Arr[0], out num2);
+
+                if (num1 > num2)
+                    return 1;
+                else if (num2 > num1)
+                    return -1;
+                else
+                    return 0;
             }
-            
+
 
             return 0;
         }

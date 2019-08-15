@@ -29,16 +29,16 @@ export class CardChecklist extends Component {
     filterChanged = (filter, value) => {
         const filters = this.state.filters;
 
-        if (filter.toLowerCase() == "year") {
+        if (filter.toLowerCase() === "year") {
             filters.year = value;
         }
-        else if (filter.toLowerCase() == "brand") {
+        else if (filter.toLowerCase() === "brand") {
             filters.brand = value;
         }
-        else if (filter.toLowerCase() == "name") {
+        else if (filter.toLowerCase() === "name") {
             filters.name = value;
         }
-        else if (filter.toLowerCase() == "sort") {
+        else if (filter.toLowerCase() === "sort") {
             filters.sortBy = value;
         }
 
