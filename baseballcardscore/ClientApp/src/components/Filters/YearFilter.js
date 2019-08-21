@@ -10,9 +10,9 @@ export class YearFilter extends Component {
 
     render() {
         return (
-            <div>
-                Year:
-                <select onChange={(e) => this.props.yearChanged("year", e.target.value)}>
+            <div class="form-group">
+                <label for="yearSelect">Year</label>
+                <select class="form-control" id="yearSelect" onChange={(e) => this.props.yearChanged("year", e.target.value)}>
                     <option value={0}>All</option>
                     {this.state.years.map(y => (<option value={y}>{y}</option>))}
                 </select>

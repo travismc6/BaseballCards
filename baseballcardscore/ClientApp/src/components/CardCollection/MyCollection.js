@@ -45,9 +45,6 @@ export class MyCollection extends Component {
         else if (filter.toLowerCase() === "sort") {
             filters.sortBy = value;
         }
-        else if (filter.toLowerCase() === "name") {
-            filters.name = value;
-        }
 
         this.setState({ filters: filters });
         this.filter();
@@ -95,7 +92,7 @@ export class MyCollection extends Component {
                 let match = false;
 
                 names.forEach(n => {
-                    if (n.startsWith(this.state.filters.toLowerCase())) {
+                    if (n.startsWith(this.state.filters.name.toLowerCase())) {
                         match = true;
                     }
                 });
@@ -113,18 +110,21 @@ export class MyCollection extends Component {
         });
 
         return (
-            <div>
-                <div>
-                    <YearFilter yearChanged={this.filterChanged} />
-                    <BrandFilter brandChanged={this.filterChanged} />
-                    <SortByFilter optionChanged={this.filterChanged} />
-                    <NameFilter nameChanged={this.filterChanged} />
-                </div>
-                <div>
-                    <b>Cards: </b> {cards.length}
-                </div>
+            <div className="container mx-2">
+                <div class="row">
+                    <div className="col-2">
+                        <h5 className="mb-2" style={{ color:"blue" }}>{cards.length} cards</h5>
 
-                {cardList}
+                        <YearFilter yearChanged={this.filterChanged} />
+                        <BrandFilter brandChanged={this.filterChanged} />
+                        <SortByFilter optionChanged={this.filterChanged} />
+                        <NameFilter nameChanged={this.filterChanged} />
+                    </div>
+
+                    <div className="col">
+                        {cardList}
+                     </div>
+                </div>
             </div>
         );
     }

@@ -6,32 +6,20 @@ import { Link } from 'react-router-dom';
 const CollectionCard = (props) => {
     const style = {
         display: 'inline-block',
-        padding: '8px',
-        margin: '16px',
-        border: '1px solid black',
-        textAlign: 'left'
     };
 
     return (
-        <div style={style} key={props.card.id}  >
+        <div className="card m-1" style={style} style={style} key={props.card.id}  >
 
-            <img  src={props.card.image} style={{ height: 100, display:'inline-block' }} />
+            <img className="mb-2 ml-2" src={props.card.image} style={{ height: 150, display: 'inline-block' }} />
 
-            <div style={{ display: 'inline-block' }}>
-                <div>
-                    <strong>{props.card.number} {props.card.playerName}</strong>
-                </div>
-                <div>
-                    {props.card.year} {props.card.brand}
-                </div>
-                <div style={{ alignContent: 'bottom' }}>
-                    <div><a href="">details</a></div>
+            <div className="card-body m1 p1" style={{ display: "inline-block" }}>
+                <h5 className="card-title">{props.card.playerName}</h5>
+                <h6 className="card-title">{props.card.year} {props.card.brand}</h6>
 
-                    <Link to={"/editCard/" + props.collectionId + "/" + props.card.id }>edit</Link>
-
-                </div>
-                </div>
-           </div>
+                <Link className="card-link" to={"/editCard/" + props.collectionId + "/" + props.card.id}>edit</Link>
+            </div>
+        </div>
     )
 };
 

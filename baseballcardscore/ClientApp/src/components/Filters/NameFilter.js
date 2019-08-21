@@ -10,9 +10,9 @@ export class NameFilter extends Component {
 
     render() {
         return (
-            <div>
-                Name:
-                <input  onChange={"name", this.props.nameChanged} />
+            <div class="form-group">
+                <label for="yearSelect">Name</label>
+                <input id="name" className="form-control" onChange={(e) => this.props.nameChanged("name", e.target.value)} />
             </div>
         )}
 }

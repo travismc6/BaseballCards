@@ -10,9 +10,9 @@ export class SortByFilter extends Component {
 
     render() {
         return (
-            <div>
-                Sort By:
-                <select onChange={(e) => this.props.optionChanged("sort", e.target.value)}>
+            <div class="form-group">
+                <label for="sortBy">Sort By</label>
+                <select id="sortBy" className="form-control" onChange={(e) => this.props.optionChanged("sort", e.target.value)}>
                     {this.state.options.map((b,i) => (<option value={i}>{b}</option>)) }
                 </select>
             </div>
