@@ -88,6 +88,13 @@ namespace BaseballCardsCore.Data
             return await collectionCards.ToListAsync();
         }
 
+        public async Task<Photo> GetPhoto(int id)
+        {
+            var photo = await _context.Photos.FirstOrDefaultAsync(p => p.Id == id);
+
+            return photo;
+        }
+
         public async Task<bool> SaveAll()
         {
             var result = await _context.SaveChangesAsync() > 0;
